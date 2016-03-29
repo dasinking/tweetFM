@@ -1,7 +1,4 @@
-# tweetFM_v4 -- WIP
-# contains: 
-# - new scrobbleread
-# - external configfile
+# tweetFM_v2.0 by @dasinking
 
 require 'yaml'
 require 'rubygems'
