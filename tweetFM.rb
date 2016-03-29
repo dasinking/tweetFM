@@ -17,10 +17,10 @@ OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 #Twitter_auth
 
 @Twitter = Twitter::REST::Client.new do |config|
-  config.consumer_key    = @CONFIG[:twitter_key]
-  config.consumer_secret = @CONFIG[:twitter_secret]
-  config.access_token        = @CONFIG[:twitter_token]
-  config.access_token_secret = @CONFIG[:twitter_token_secret]
+  config.consumer_key    		= @CONFIG[:twitter_key]
+  config.consumer_secret 		= @CONFIG[:twitter_secret]
+  config.access_token        	= @CONFIG[:twitter_token]
+  config.access_token_secret 	= @CONFIG[:twitter_token_secret]
 end
 
 time = Time.new
@@ -35,7 +35,7 @@ puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Lastfm logged in'
 
 #MAINLOOP
 
-@Twitter.update('[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'tweetFM_v4a by @dasinking == online')
+@Twitter.update('[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'tweetFM_v2.0 by @dasinking == online')
 
 while 1 != 2 do
 
@@ -47,7 +47,6 @@ time = Time.new
 puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Loop'
 sleep(1)
 @recent = @lastfm.user.get_recent_tracks(user: @CONFIG[:lastfm_user], api_key: @lastfm_apikey, limit: 1)
-@recent = @recent[0] if @recent.is_a? Array
 
 rescue => e
 p e
@@ -57,19 +56,14 @@ retry while true
 
 end
 
-begin
-
-
-
+if @recent.is_a? Hash
 
 $date1 = @recent["date"]["uts"]
 
 if $date1 != $date2
 
+begin
 
-# Debug:
-require 'pry'
-binding.pry
 	@artistname = @recent["artist"]["content"]	
 	time = Time.new
 	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@artistname set'
@@ -77,8 +71,7 @@ binding.pry
 	time = Time.new
 	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@trackname set'
 
-	#@tweetoutput = '♫ ' + @artistname + ' - ' + @trackname + ' ' + '#NowPlaying'
-	@tweetoutput = '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '♫ ' + @artistname + ' - ' + @trackname + ' ' + '#NowPlaying'
+	@tweetoutput = '♫ ' + @artistname + ' - ' + @trackname + ' ' + '#NowPlaying'
 	time = Time.new
 	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Waiting: ' + @tweetoutput
 	@Twitter.update(@tweetoutput)
@@ -87,35 +80,36 @@ binding.pry
 
 	$date2 = $date1
 	
+	end
+	
 	else
 
 time = Time.new
 puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'No new Scrobbles'
 	
 	end
+	
+	else
 
-else
-
-$date1 = @recent["date"]["uts"]
+$date1 = @recent[1]["date"]["uts"]
 
 if $date1 != $date2
 
-	@artistname = @recent["artist"]["content"]
+	@artistname = @recent[1]["artist"]["content"]
 	time = Time.new
 	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@artistname set'
-	@trackname = @recent["name"]
+	@trackname = @recent[1]["name"]
 	time = Time.new
 	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@trackname set'
 
-	#@tweetoutput = '♫ ' + @artistname + ' - ' + @trackname + ' ' + '#NowPlaying'
-	@tweetoutput = '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '♫ ' + @artistname + ' - ' + @trackname + ' ' + '#NowPlaying'
+	@tweetoutput = '♫ ' + @artistname + ' - ' + @trackname + ' ' + '#NowPlaying'
 	time = Time.new
 	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Waiting: ' + @tweetoutput
 	@Twitter.update(@tweetoutput)
 	time = Time.new
 	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Tweet sent: ' + @tweetoutput
 
-	$dateB = $dateA
+	$date2 = $date1
 
 else
 
@@ -127,4 +121,3 @@ end
 end
 
 end
-

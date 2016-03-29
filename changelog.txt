@@ -1,0 +1,16 @@
+# v1.0:
+		- initial release
+# v1.1:
+		- made a downtime of the Last.FM-API acceptable *no more crashing scripts, yay*
+		(damn you last.fm! you with your unreliable api!)
+# v1.2: 
+		- added a "blaming Last.FM for their downtimes"-algorithm
+		- cleaned up console outputs and added time
+# v2.0: 
+		BIG UPDATE:
+		- new way of tweeting the scrobbles:
+			- it now only tweets scrobbles, that were successfully heard until the end (aka. landed in the history)
+			- no more tweets lost!
+		- improved the performance of the script overall
+		- outsourced the configuration of the APIs
+		- little bugfixes
