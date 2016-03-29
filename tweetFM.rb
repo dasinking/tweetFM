@@ -35,6 +35,7 @@ puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Lastfm logged in'
 
 #MAINLOOP
 
+@Twitter.update('[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'tweetFM_v4a by @dasinking == online')
 
 while 1 != 2 do
 
