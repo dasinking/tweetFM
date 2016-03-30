@@ -32,7 +32,7 @@ puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Lastfm logged in'
 
 #MAINLOOP
 
-@Twitter.update('[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'tweetFM_v2.0 by @dasinking == online')
+@Twitter.update('[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'tweetFM_v2.1a by @dasinking == online')
 
 while 1 != 2 do
 
@@ -40,79 +40,85 @@ while 1 != 2 do
 
 begin 
 
-time = Time.new
-puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Loop'
-sleep(1)
-@recent = @lastfm.user.get_recent_tracks(user: @CONFIG[:lastfm_user], api_key: @lastfm_apikey, limit: 1)
+	time = Time.new
+	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Loop'
+	sleep(1)
+	@recent = @lastfm.user.get_recent_tracks(user: @CONFIG[:lastfm_user], api_key: @lastfm_apikey, limit: 1)
 
-rescue => e
-p e
-time = Time.new
-@Twitter.update('Übrigens: @lastfm ist mal wieder down. Stand: ' + time.strftime("%d.%m.%Y %H:%M:%S") + ' Uhr')
-retry while true
+	rescue => e
+	p e
+	time = Time.new
+	@Twitter.update('Übrigens: @lastfm ist mal wieder down. Stand: ' + time.strftime("%d.%m.%Y %H:%M:%S") + ' Uhr')
+	retry while true
 
 end
 
 if @recent.is_a? Hash
 
-$date1 = @recent["date"]["uts"]
+	$date1 = @recent["date"]["uts"]
 
-if $date1 != $date2
+	if $date1 != $date2
 
-begin
+		begin
 
-	@artistname = @recent["artist"]["content"]	
-	time = Time.new
-	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@artistname set'
-	@trackname = @recent["name"]
-	time = Time.new
-	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@trackname set'
+			@artistname = @recent["artist"]["content"]	
+			time = Time.new
+			puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@artistname set'
+			@trackname = @recent["name"]
+			time = Time.new
+			puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@trackname set'
 
-	@tweetoutput = '♫ ' + @artistname + ' - ' + @trackname + ' ' + '#NowPlaying'
-	time = Time.new
-	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Waiting: ' + @tweetoutput
-	@Twitter.update(@tweetoutput)
-	time = Time.new
-	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Tweet sent: ' + @tweetoutput
+			@tweetoutput = '♫ ' + @artistname + ' - ' + @trackname + ' ' + '#NowPlaying'
+			time = Time.new
+			puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Waiting: ' + @tweetoutput
+			@Twitter.update(@tweetoutput)
+			time = Time.new
+			puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Tweet sent: ' + @tweetoutput
 
-	$date2 = $date1
+			$date2 = $date1
 	
-	end
-	
-	else
-
-time = Time.new
-puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'No new Scrobbles'
-	
-	end
+		end
 	
 	else
 
-$date1 = @recent[1]["date"]["uts"]
+		time = Time.new
+		puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'No new Scrobbles'
+	
+	end
+	
+else if @recent.is_a? Array
 
-if $date1 != $date2
+	$date1 = @recent[1]["date"]["uts"]
 
-	@artistname = @recent[1]["artist"]["content"]
-	time = Time.new
-	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@artistname set'
-	@trackname = @recent[1]["name"]
-	time = Time.new
-	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@trackname set'
+	if $date1 != $date2
 
-	@tweetoutput = '♫ ' + @artistname + ' - ' + @trackname + ' ' + '#NowPlaying'
-	time = Time.new
-	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Waiting: ' + @tweetoutput
-	@Twitter.update(@tweetoutput)
-	time = Time.new
-	puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Tweet sent: ' + @tweetoutput
+		@artistname = @recent[1]["artist"]["content"]
+		time = Time.new
+		puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@artistname set'
+		@trackname = @recent[1]["name"]
+		time = Time.new
+		puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + '@trackname set'
 
-	$date2 = $date1
+		@tweetoutput = '♫ ' + @artistname + ' - ' + @trackname + ' ' + '#NowPlaying'
+		time = Time.new
+		puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Waiting: ' + @tweetoutput
+		@Twitter.update(@tweetoutput)
+		time = Time.new
+		puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Tweet sent: ' + @tweetoutput
 
-else
+		$date2 = $date1
 
-time = Time.new
-puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'No new Scrobbles'
+	else
 
+		time = Time.new
+		puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'No new Scrobbles'
+
+	end
+
+else 	
+	
+	@Twitter.update('Also was auch immer die API grade geantwortet hat...es war ungültig. @dasinking')
+	
 end
 
 end
