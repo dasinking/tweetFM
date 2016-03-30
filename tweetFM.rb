@@ -1,4 +1,4 @@
-# tweetFM_v2.0 by @dasinking
+# tweetFM_v2.1 by @dasinking
 
 require 'yaml'
 require 'rubygems'
@@ -32,7 +32,7 @@ puts '[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Lastfm logged in'
 
 #MAINLOOP
 
-@Twitter.update('[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'tweetFM_v2.1a by @dasinking == online')
+@Twitter.update('[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'tweetFM_v2.1 by @dasinking == online')
 
 while 1 != 2 do
 
@@ -47,11 +47,11 @@ begin
 
 	rescue => e
 	p e
-	time = Time.new
-	@Twitter.update('Übrigens: @lastfm ist mal wieder down. Stand: ' + time.strftime("%d.%m.%Y %H:%M:%S") + ' Uhr')
 	retry while true
 
 end
+
+# tweet if no active scrobbling
 
 if @recent.is_a? Hash
 
@@ -86,6 +86,8 @@ if @recent.is_a? Hash
 	
 	end
 	
+# tweet if active scrobbling	
+	
 else if @recent.is_a? Array
 
 	$date1 = @recent[1]["date"]["uts"]
@@ -115,9 +117,12 @@ else if @recent.is_a? Array
 
 	end
 
+# tweet the exception	
+	
 else 	
 	
-	@Twitter.update('Also was auch immer die API grade geantwortet hat...es war ungültig. @dasinking')
+	time = Time.new
+	@Twitter.update('[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Also was auch immer die API grade geantwortet hat...es war ungültig. @dasinking')
 	
 end
 

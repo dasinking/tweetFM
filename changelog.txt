@@ -14,3 +14,7 @@
 		- improved the performance of the script overall
 		- outsourced the configuration of the APIs
 		- little bugfixes
+# v2.1:
+		- handling a exception of the lastfm-api with an invalid answer
+		- improved formatting 
+		- removed the blaming bot because of spam (too many outages! >:o)
