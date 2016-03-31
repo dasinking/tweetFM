@@ -123,6 +123,7 @@ else
 	
 	time = Time.new
 	@Twitter.update('[' + time.strftime("%d-%m-%Y %H:%M:%S") + '] ' + 'Also was auch immer die API grade geantwortet hat...es war ungültig. @dasinking')
+	@Twitter.update(@recent.first)
 	
 end
 
