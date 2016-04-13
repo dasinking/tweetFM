@@ -18,3 +18,8 @@
 		- handling a exception of the lastfm-api with an invalid answer
 		- improved formatting 
 		- removed the blaming bot because of spam (too many outages! >:o)
+		
+# v3.0:
+		- a log-file gets created now!
+		- cleaned up console outputs
+		- MASSIVELY cleaned up the code
