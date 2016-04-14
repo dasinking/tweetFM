@@ -1,5 +1,5 @@
 # dHdlZXRGTSBieSBkYXNpbmtpbmcgLSBtYWRlIGluIDIwMTYgd2l0aCA8MyBD
-version = "tweetFM_v3.0 by @dasinking"
+version = "tweetFM_v3.1 by @dasinking"
 
 require 'yaml'
 require 'rubygems'
@@ -42,7 +42,7 @@ while 1 != 2 do
 		sleep(1)
 		@recent = @lastfm.user.get_recent_tracks(user: @CONFIG[:lastfm_user], api_key: @lastfm_apikey, limit: 1)
 		rescue => e
-		log.error ('LastFM-API down' + e)
+		log.error ('LastFM-API down')
 		retry while true
 	end
 
