@@ -3,7 +3,6 @@ version = "tweetFM_v3.1 by @dasinking"
 
 require 'yaml'
 require 'rubygems'
-require 'json'
 require 'twitter'
 require 'lastfm'
 require 'logger'
