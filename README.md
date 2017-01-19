@@ -5,7 +5,7 @@ A ruby script for tweeting your latest scrobbles
 
 * A Twitter and Last.FM-account (obviously)
 * Ruby 2.0+
-* the following gems: yaml, rubygems, json, twitter, lastfm
+* the following gems: yaml, rubygems, json, twitter, lastfm, logger
 
 ## Usage
 
