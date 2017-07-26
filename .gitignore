@@ -1,3 +1,5 @@
 config.yml
 desktop.ini
 log.*
+tweetFMtests.rb
+config_beforev4.yml

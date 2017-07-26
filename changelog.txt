@@ -17,10 +17,31 @@
 # v2.1:
 		- handling a exception of the lastfm-api with an invalid answer
 		- improved formatting 
-		- removed the blaming bot because of spam (too many outages! >:o)
+		- removed the blaming bot because of spam (too many outages lol)
 # v3.0:
 		- a log-file gets created now!
 		- cleaned up console outputs
 		- MASSIVELY cleaned up the code
 # v3.1:
 		- bug fixed that crashed the script, whoopsies
+# v4-a1:
+		- script doesn't crash anymore with long song titles (character limit check now integrated)
+# v4-a2:
+		- more futurama references in patch notes from now on
+		- welcome our lord and savior: oAuth!
+			- delete your config file before this update. you'll not need it anymore (thank fuck). a new one will be generated in the setup process. 
+			- you don't need to create your own twitter app from now on, everything's running over my tweetFM-app per default. 
+				- if you want to use your own (for whatever reason), just change the key+secret in lines 13+14
+					- open source: where you can change things that make 0 difference, just because you can!
+			- all hail the hypnotoad
+		- more rescues to the rescue
+		- option to credit me via the url field in your profile (would be very nice of you, because it's free, open source and stuff)
+		- cleaned up the code a bit (oop style)
+			- step by step i'm giving everything it's own function. welcome in the world of tomorrow!
+		- added some comments (stfu @streamfire)
+		- tl;dr: a much more stable tweetFM (hopefully) 
+# v4-a3:
+		- you have to cryogenically freeze yourself to know the patch notes of the future, my friend
+# v64:
+		- we've hit BASE
+			- wink wink
