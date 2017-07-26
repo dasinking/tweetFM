@@ -1,7 +1,7 @@
 # dHdlZXRGTSB2NCBieSBkYXNpbmtpbmcgLSBtYWRlIGluIDIwMTYtMTcgd2l0aCA8Mw==
 @version = "tweetFM_v4-alpha2"
+
 require 'yaml'
-require 'rubygems'
 require 'twitter'
 require 'lastfm'
 require 'oauth'
@@ -9,14 +9,14 @@ require 'oauth'
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE                       #only needed for some ruby installations on windows, when you get a certificate error (fuck that)
 
 #####twitter_auth#####
-  @Twitter = Twitter::REST::Client.new do |config|  
-    config.consumer_key       = "4iTHA7VaA85qX0gaIT6fskn9f"                             #wooooooah! api keys!
-    config.consumer_secret    = "3GQIVok9vUqob30DfQlghKLM7oACHqKaJtI1YMi90LfKI7a1KT"    #those are public anyways, so it doesn't matter posting them publicly. :)
-  end
+@Twitter = Twitter::REST::Client.new do |config|  
+  config.consumer_key       = "4iTHA7VaA85qX0gaIT6fskn9f"                             #wooooooah! api keys!
+  config.consumer_secret    = "3GQIVok9vUqob30DfQlghKLM7oACHqKaJtI1YMi90LfKI7a1KT"    #those are public anyways, so it doesn't matter posting them publicly. :)
+end
 #####twitter_auth_end#####
 
 #####lastfm_auth#####
-  @lastfm = Lastfm.new("d40320e36eca2707150f55723630436e", "aff6f8a58d4ad1a937e0128a83dec486")  #especially those, because you can't create an app on last.fm for MONTHS now. you're welcome.
+@lastfm = Lastfm.new("d40320e36eca2707150f55723630436e", "aff6f8a58d4ad1a937e0128a83dec486")  #especially those, because you can't create an app on last.fm for MONTHS now. you're welcome.
 #####lastfm_auth_end#####
 
 def setup
@@ -158,37 +158,38 @@ end
 
 #####MAINLOOP#####          #this is where all the functions before are called. it's already pretty organized here, but
 begin                       #i'm sure, that i'll OOP the shit out of the rest some time in the future
-    setup                   #the setup! either create a config file, or init from a valid existing one
+  setup                   #the setup! either create a config file, or init from a valid existing one
 
-    @Twitter.update("[#{Time.new.strftime("%d-%m-%Y %H:%M:%S").to_s}] #{@version} by @dasinking == online")  #welcome online
-    puts "[#{Time.new.strftime("%d-%m-%Y %H:%M:%S").to_s}] #{@version} by @dasinking == online"
+  @Twitter.update("[#{Time.new.strftime("%d-%m-%Y %H:%M:%S").to_s}] #{@version} by @dasinking == online")  #welcome online
+  puts "[#{Time.new.strftime("%d-%m-%Y %H:%M:%S").to_s}] #{@version} by @dasinking == online"
 
-    while 1 != 2 do         #endless loop
-        begin                                                               #lastfm's api answer are weird. although we only call 1, we can get 2. why? because of active scrobbling.
-            scrobbleread                                                    #when you're still actively to a track, it also provides you with the last song you fully heard.
-            #tweet if no active scrobbling                                  #this doesn't really make sense, as we only wanted one answer, BUT WE CAN ABUSE THIS, as it uses different types 
-            if @recent.is_a? Hash                                           #of answers for both of them. a hash for the single answer (no active scrobble) and an array for two (active)
-                $date1 = @recent["date"]["uts"]                             #getting the scrobble date of the latest answer in UTS (unix time stamp)
-                if $date1 != $date2                                         #comparing it to the last saved date. this results in a tweet with every start of tweetFM, but i'm fine with this
-                    begin                                                   #if these differ from each other, we tweet the new song
-                        tweet(@recent["artist"]["content"],@recent["name"]) #calling the tweet function and sending artist and track with it
-                        $date2 = $date1                                     #setting the new date as the new pivot element
-                    end
-                end 
-            #tweet if active scrobbling                                     #here's the if-cond for active scrobbling!
-            else if @recent.is_a? Array                                     #yes, it's an array then.
-              $date1 = @recent[1]["date"]["uts"]                            #same shit as above, but we need to set an index for the array 
-              if $date1 != $date2                                           #i use index 1, because i only want to tweet fully listened to songs
-                begin
-                  tweet(@recent[1]["artist"]["content"],@recent[1]["name"]) #again, same stuff as above
-                  $date2 = $date1
-                end
-              else    
-                #exception because of who the fuck knows
-                puts 'Unsupported API-Answer'                               #sometimes (surprisingly often) lastfm isn't down, but the api answers are rubbish. enjoy the spam in your CLI.
-              end
-            end
+  while 1 != 2 do         #endless loop
+    begin                                                               #lastfm's api answer are weird. although we only call 1, we can get 2. why? because of active scrobbling.
+      scrobbleread                                                    #when you're still actively to a track, it also provides you with the last song you fully heard.
+      #tweet if no active scrobbling                                  #this doesn't really make sense, as we only wanted one answer, BUT WE CAN ABUSE THIS, as it uses different types 
+      if @recent.is_a? Hash                                           #of answers for both of them. a hash for the single answer (no active scrobble) and an array for two (active)
+        $date1 = @recent["date"]["uts"]                             #getting the scrobble date of the latest answer in UTS (unix time stamp)
+        if $date1 != $date2                                         #comparing it to the last saved date. this results in a tweet with every start of tweetFM, but i'm fine with this
+          begin                                                   #if these differ from each other, we tweet the new song
+            tweet(@recent["artist"]["content"],@recent["name"]) #calling the tweet function and sending artist and track with it
+            $date2 = $date1                                     #setting the new date as the new pivot element
+          end
+        end 
+      #tweet if active scrobbling                                     #here's the if-cond for active scrobbling!
+      else if @recent.is_a? Array                                     #yes, it's an array then.
+        $date1 = @recent[1]["date"]["uts"]                            #same shit as above, but we need to set an index for the array 
+        if $date1 != $date2                                           #i use index 1, because i only want to tweet fully listened to songs
+          begin
+            tweet(@recent[1]["artist"]["content"],@recent[1]["name"]) #again, same stuff as above
+            $date2 = $date1
+          end
+        else    
+          #exception because of who the fuck knows
+          puts 'Unsupported API-Answer'                               #sometimes (surprisingly often) lastfm isn't down, but the api answers are rubbish. enjoy the spam in your CLI.
         end
+      end
     end
+  end
 end
+
 end #a friend of mine once said, i should write more comments in my code. thank him for this clusterfuck of text everywhere: @_streamfire_ on twitter.
