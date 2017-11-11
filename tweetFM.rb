@@ -136,7 +136,7 @@ def tweet(artist, track) #function for creating the tweets out of a handed track
   else
     begin
       artistlength = artist.size                                                            #counting the chars of the artist
-      chomper = 123 - artistlength - 3                                                      #calculating how many chars we have left for the track name (minus 3 because "...")
+      chomper = 263 - artistlength - 3                                                      #calculating how many chars we have left for the track name (minus 3 because "...")
       @tweetoutput = "♫ #{artist} - #{track[0...chomper]}... #NowPlaying"                   #chomping the trackname and put together the tweet
       @Twitter.update(@tweetoutput)                                                         #tweet that shit
       puts "[#{Time.new.strftime("%d-%m-%Y %H:%M:%S").to_s}] Tweet sent: #{@tweetoutput}"
