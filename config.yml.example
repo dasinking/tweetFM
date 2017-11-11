@@ -1,8 +1,6 @@
 ---
-:lastfm_apikey: 			"xxx"
-:lastfm_apisecret: 			"xxx"
-:twitter_key:			 	"xxx"
-:twitter_secret: 			"xxx"
-:twitter_token:				"xxx"
-:twitter_token_secret: 		"xxx"
-:lastfm_user:				'sinkingFX'
+:twitter_token:				xxx
+:twitter_token_secret: 		xxx
+:lastfm_user:				sinkingFX
+:url:						true
+:revision:					1
