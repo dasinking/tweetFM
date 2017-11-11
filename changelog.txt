@@ -41,6 +41,9 @@
 		- added some comments (stfu @streamfire)
 		- tl;dr: a much more stable tweetFM (hopefully) 
 # v4-a3:
+		- 280 characters are now supported
+			- thanks to @nopejs for testing!
+# v4-a4:
 		- you have to cryogenically freeze yourself to know the patch notes of the future, my friend
 # v64:
 		- we've hit BASE
