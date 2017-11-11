@@ -123,7 +123,7 @@ def setup
 end
 
 def tweet(artist, track) #function for creating the tweets out of a handed track
-  if "#{artist}#{track}".size < 123 then                                                    #123 because that's the number of chars left when including the hashtag etc
+  if "#{artist}#{track}".size < 263 then                                                    #123 because that's the number of chars left when including the hashtag etc
     begin                                                                                   #it's just a check for the character limit
       @tweetoutput = "♫ #{artist} - #{track} #NowPlaying"                                   #this is the part of the function for tweets that fit the limit without chomping needed
       @Twitter.update(@tweetoutput)                                                         #lets tweet it out
