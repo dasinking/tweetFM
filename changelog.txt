@@ -24,9 +24,7 @@
 		- MASSIVELY cleaned up the code
 # v3.1:
 		- bug fixed that crashed the script, whoopsies
-# v4-a1:
-		- script doesn't crash anymore with long song titles (character limit check now integrated)
-# v4-a2:
+# v4:
 		- more futurama references in patch notes from now on
 		- welcome our lord and savior: oAuth!
 			- delete your config file before this update. you'll not need it anymore (thank fuck). a new one will be generated in the setup process. 
@@ -34,17 +32,19 @@
 				- if you want to use your own (for whatever reason), just change the key+secret in lines 13+14
 					- open source: where you can change things that make 0 difference, just because you can!
 			- all hail the hypnotoad
+		- script doesn't crash anymore with long song titles (character limit check now integrated)
 		- more rescues to the rescue
-		- option to credit me via the url field in your profile (would be very nice of you, because it's free, open source and stuff)
+		- option to credit me via the url field in your profile 
+			- (would be very nice of you, because it's free, open source and stuff)
 		- cleaned up the code a bit (oop style)
 			- step by step i'm giving everything it's own function. welcome in the world of tomorrow!
 		- added some comments (stfu @streamfire)
-		- tl;dr: a much more stable tweetFM (hopefully) 
-# v4-a3:
 		- 280 characters are now supported
 			- thanks to @nopejs for testing!
-# v4-a4:
+		- tl;dr: a much more stable tweetFM (hopefully) 
+# v5:
 		- you have to cryogenically freeze yourself to know the patch notes of the future, my friend
+			- you can still push feature requests in the projects section on the repo
 # v64:
 		- we've hit BASE
 			- wink wink
