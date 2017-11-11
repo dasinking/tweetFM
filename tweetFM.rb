@@ -1,5 +1,5 @@
 # dHdlZXRGTSB2NCBieSBkYXNpbmtpbmcgLSBtYWRlIGluIDIwMTYtMTcgd2l0aCA8Mw==
-@version = "tweetFM_v4-alpha2"
+@version = "tweetFM_v4-alpha3"
 
 require 'yaml'
 require 'twitter'
