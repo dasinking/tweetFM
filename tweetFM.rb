@@ -1,4 +1,4 @@
-
+#!/usr/bin/env ruby
 # dHdlZXRGTSB2NCBieSBkYXNpbmtpbmcgLSBtYWRlIGluIDIwMTYtMTcgd2l0aCA8Mw==
 @version = 'tweetFM_v4'
 
