@@ -204,7 +204,7 @@ rescue StandardError => e
   # lets maybe wait a few seconds, if it's really down
   sleep(3)
   # this rescue should be made more specific, otherwise some bad shit can happen
-  loop { retry }
+  retry
 end
 
 # function for getting the latest scrobbles from a profile
@@ -218,7 +218,7 @@ rescue StandardError => e # rescue when down
   # in this case, this is good enough as it's just a GET.
   # be more careful with POST.
   log 'LastFM-API down: ' + e.message
-  loop { retry }
+  retry
 end
 
 # Builds a string for the log message including timestamp
@@ -276,12 +276,12 @@ begin
       # tweet when a scrobble is active
       # I use index 1, because I only want to tweet fully listened to songs
       tweet_latest_track(@recent[1])
-      if $date1 == $date2
-        # exception because of who the fuck knows
-        # sometimes (surprisingly often) lastfm isn't down, but the api
-        # answers are rubbish. enjoy the spam in your CLI.
-        log 'Unsupported API-Answer'
-      end
+      # if $date1 == $date2
+      #   # exception because of who the fuck knows
+      #   # sometimes (surprisingly often) lastfm isn't down, but the api
+      #   # answers are rubbish. enjoy the spam in your CLI.
+      #   log 'Unsupported API-Answer'
+      # end
     end
   end
 end
